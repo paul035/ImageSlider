@@ -15,14 +15,14 @@ import android.widget.TextView;
  */
 public class CustomSwipeAdapter extends PagerAdapter{
 
-    private int[] image_resource = {R.drawable.img_0, R.drawable.img_1, R.drawable.img_2,
-            R.drawable.img_3, R.drawable.img_4,};
+    private int[] image_resource;
     private Context context;
     private LayoutInflater layoutInflater;
 
-    //Constructor for this class
-    public CustomSwipeAdapter(Context context){
+    //Constructor for CustomSwipeAdapter class
+    public CustomSwipeAdapter(Context context, int[] image_resource){
         this.context = context;
+        this.image_resource = image_resource;
     }
 
     //This method will return the number of images
