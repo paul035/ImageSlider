@@ -18,6 +18,7 @@ public class CustomSwipeAdapter extends PagerAdapter{
     private int[] image_resource;
     private Context context;
     private LayoutInflater layoutInflater;
+    private int custom_position = 0;
 
     //Constructor for CustomSwipeAdapter class
     public CustomSwipeAdapter(Context context, int[] image_resource){
@@ -29,7 +30,9 @@ public class CustomSwipeAdapter extends PagerAdapter{
     //which is equal to the length of image_resource array
     @Override
     public int getCount() {
-        return image_resource.length;
+        //return image_resource.length;
+        //Now this will return the infinite value
+        return Integer.MAX_VALUE;
     }
 
     @Override
@@ -41,15 +44,16 @@ public class CustomSwipeAdapter extends PagerAdapter{
     //each of swipe view
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        if(custom_position > 4) {
+            custom_position = 0;
+        }
         //Initialize layoutInflater object
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //Create a view and inflate it with swipe layout
         View item_view = layoutInflater.inflate(R.layout.swipe_layout, container,false);
         ImageView imageView = (ImageView)item_view.findViewById(R.id.image_view);
-        TextView textView = (TextView)item_view.findViewById(R.id.image_count);
-        imageView.setImageResource(image_resource[position]);
-        textView.setText("Image: " + position);
+        imageView.setImageResource(image_resource[custom_position++]);
         container.addView(item_view);
         return item_view;
     }
