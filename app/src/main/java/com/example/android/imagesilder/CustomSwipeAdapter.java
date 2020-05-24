@@ -15,15 +15,14 @@ import android.widget.TextView;
  */
 public class CustomSwipeAdapter extends PagerAdapter{
 
-    private int[] image_resource;
+    private int[] image_resource = {R.drawable.img_0, R.drawable.img_1, R.drawable.img_2,
+            R.drawable.img_3, R.drawable.img_4,};
     private Context context;
     private LayoutInflater layoutInflater;
-    private int custom_position = 0;
 
     //Constructor for CustomSwipeAdapter class
-    public CustomSwipeAdapter(Context context, int[] image_resource){
+    public CustomSwipeAdapter(Context context){
         this.context = context;
-        this.image_resource = image_resource;
     }
 
     //This method will return the number of images
@@ -31,8 +30,7 @@ public class CustomSwipeAdapter extends PagerAdapter{
     @Override
     public int getCount() {
         //return image_resource.length;
-        //Now this will return the infinite value
-        return Integer.MAX_VALUE;
+        return image_resource.length;
     }
 
     @Override
@@ -44,16 +42,13 @@ public class CustomSwipeAdapter extends PagerAdapter{
     //each of swipe view
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        if(custom_position > 4) {
-            custom_position = 0;
-        }
         //Initialize layoutInflater object
         layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //Create a view and inflate it with swipe layout
         View item_view = layoutInflater.inflate(R.layout.swipe_layout, container,false);
         ImageView imageView = (ImageView)item_view.findViewById(R.id.image_view);
-        imageView.setImageResource(image_resource[custom_position++]);
+        imageView.setImageResource(image_resource[position]);
         container.addView(item_view);
         return item_view;
     }
